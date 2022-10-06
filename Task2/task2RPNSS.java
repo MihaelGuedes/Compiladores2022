@@ -37,37 +37,42 @@ public class task2RPNSS {
 
         System.out.println(listaDeTokens);
 
-        while(!listaDeTokens.isEmpty()){
-                String operador = listaDeTokens.remove(0).lexeme;
-                switch(operador){
-                    case "+":
-                    case "-":
-                    case "/":
-                    case "*":
-                        int op1, op2;
-                        op1 = Integer.parseInt(pilha.pop());
-                        op2 = Integer.parseInt(pilha.pop());
-                        switch(operador){
-                            case "+":
-                                pilha.push(Integer.toString(op1 + op2));
-                                break;
-                            case "-":
-                                pilha.push(Integer.toString(op1 - op2));
-                                break;
-                            case "/":
-                                pilha.push(Integer.toString(op1 / op2));
-                                break;
-                            case "*":
-                                pilha.push(Integer.toString(op1 * op2));
-                                break;
-                        }
-                        break;
-                    default:
-                        pilha.push(operador);
-                        break;
-                }
-            }
+        resultadoOperacao(listaDeTokens, pilha);
+    }
 
-            System.out.println("Saída: " + pilha.pop());
+    private static void resultadoOperacao(List<Token> listaDeTokens, Stack<String>pilha) {
+        while(!listaDeTokens.isEmpty()) {
+            String operador = listaDeTokens.remove(0).lexeme;
+
+            switch(operador){
+                case "+":
+                case "-":
+                case "/":
+                case "*":
+                    int op1, op2;
+                    op1 = Integer.parseInt(pilha.pop());
+                    op2 = Integer.parseInt(pilha.pop());
+                    switch(operador){
+                        case "+":
+                            pilha.push(Integer.toString(op1 + op2));
+                            break;
+                        case "-":
+                            pilha.push(Integer.toString(op1 - op2));
+                            break;
+                        case "/":
+                            pilha.push(Integer.toString(op1 / op2));
+                            break;
+                        case "*":
+                            pilha.push(Integer.toString(op1 * op2));
+                            break;
+                    }
+                    break;
+                default:
+                    pilha.push(operador);
+                    break;
+            }
         }
+        
+        System.out.println("Saída: " + pilha.pop());
+    }
 }
